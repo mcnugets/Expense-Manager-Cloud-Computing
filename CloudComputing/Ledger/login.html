@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <!-- Links to stylesheet and scripts -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css">
+    <link rel="stylesheet" type="text/css" href="styles/laptops.css">
+    <link rel="stylesheet" type="text/css" href="styles/login.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+
+    <style>
+        #loginbox {
+            width: 600px;
+
+        }
+
+        #signupbox {
+            width: 600px;
+        }
+
+        .panel {
+            margin: 0 auto;
+            margin-top: 125px;
+            margin-bottom: 100px;
+            border-radius: 20px;
+            box-shadow: 10px 10px 8px #888888;
+            font-size: 18px;
+            font-family: "Gill Sans", sans-serif;
+        }
+
+        .panel-body {
+            padding: 2rem;
+        }
+
+        .panel-heading {
+            height: 6rem;
+            border-radius: 20px;
+            padding-top: 20px;
+        }
+
+        label {
+            font-weight: normal;
+            margin: 10px 0;
+        }
+
+        body {
+    background-color:  #f4f4d7;
+    background-size: cover;
+    background-position: center; 
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    font-family: "Lato";
+}
+
+h1 {
+	font-weight: 700;
+	font-size: 5em;
+}
+
+h2, h3  {
+	margin-top: 10px;
+}
+
+/* navigation bar */
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default {
+    background-color: black;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: grey;
+}
+
+.navbar-form {
+	margin-top:75px;
+	padding:0px;
+}
+#dropdownMenu1{
+   margin-bottom: 20px;
+   margin-top: 75px;
+
+   float: right;
+}
+.dropdown-menu {
+    margin-right: 0px;
+    margin-top: 109px;
+    margin-left: 955px;
+}
+
+hr {
+
+	margin-top:120px;
+    width: 1100px;
+    border-top: 2px solid grey;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+
+img {
+	border-bottom:1px solid grey;
+}
+
+.thumbnail:hover {
+	border: 1px solid grey;
+}
+
+.thumbnail button {
+	margin-left: 35px;
+	background-color: green;
+}
+
+.trolleybtn button{
+    margin-bottom: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    letter-spacing: .08em;
+    border: 2px solid;
+    outline: unset;
+    height: 40px;
+    background-color: #084;
+    border-color: #084;
+    color: #fff;
+    font-weight: 600;
+    font-family: Arial,Helvetica,sans-serif;
+    display: inline-block;
+    text-align: center;
+    padding: 6px 15px;
+    border-radius: 3px;
+}
+
+button:hover {
+	background-color: #00aa50;
+	border-color:  #00aa50;
+}
+
+
+.footer {
+
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #2f353d;
+    text-align: left;
+    padding: 10px 40px;
+    color:white;
+    margin-top:10px;
+
+}
+
+.social {
+	float: right;
+}
+
+.caption h5, h4 {
+	text-align: center;
+}
+
+.navbar-header img{
+	position:relative;
+	top: -16px;
+	height: 50px;
+	border: none;
+
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#home"><img alt="LOGO" src="images/logo0.png"></a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="laptops.html">Laptops</a></li>
+                    <li><a href="#hcontact">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="login.html">Register <i class="fas fa-user-plus"></i> / Login <i
+                                class="fas fa-user"></i> </a></li>
+                    <li><a href="#basket">Basket <i class="fas fa-shopping-basket"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <!-- login window -->
+        <div id="loginbox" class="panel panel-default" style="max-width: 75rem;">
+            <div class="panel-heading">Sign In</div>
+            <div style="font-size: 85%; position: relative; top:-38px; margin-left: 350px">Don't have an account! <a
+                    href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">Sign Up</a></div>
+
+            <div class="panel-body">
+                <form>
+
+                    <label for="inputEmail1">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" placeholder="Username">
+                    </div>
+
+                    <label for="inputEmail1">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+
+                    <br>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="login-remember" name="remember" value="1">
+                        <label>&nbsp Remember me</label>
+
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-primary" style="margin-bottom:20px">Login</button>
+                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- sign up window -->
+        <div id="signupbox" style="display:none" class="panel panel-default" style="max-width: 50rem;">
+            <div class="panel-heading">Sign Up</div>
+            <div style="font-size: 85%; position: relative; top:-38px; margin-left: 330px">Do you have an account? <a
+                    id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+
+            <div class="panel-body">
+                <form>
+                    <label for="inputEmail1">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" placeholder="Enter email">
+                    </div>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small><br>
+
+                    <label for="inputEmail1">First Name</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fas fa-user-circle"></i></span>
+                        <input type="text" class="form-control" placeholder="Enter first name">
+                    </div>
+
+                    <label for="inputEmail1">Last Name</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fas fa-user-circle"></i></span>
+                        <input type="text" class="form-control" placeholder="Enter last name">
+                    </div>
+
+                    <label for="inputEmail1">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Choose password">
+                    </div>
+                    <small id="passwordHelp" class="form-text text-muted">Password must be 8 characters of
+                        length</small><br>
+
+                    <button type="submit" class="btn btn-primary" style="margin: 20px 0 20px 0">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- display footer -->
+    <div class="footer">
+        © 2018 Copyright <a href="#"> Laptops.com </a>
+        <span class="social">Get connected with us on social networks! &nbsp &nbsp
+            <i class="fab fa-facebook-f"> </i>
+            <i class="fab fa-twitter"> </i>
+            <i class="fab fa-google-plus"> </i>
+            <i class="fab fa-linkedin"> </i>
+            <i class="fab fa-instagram"> </i></span>
+    </div>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
