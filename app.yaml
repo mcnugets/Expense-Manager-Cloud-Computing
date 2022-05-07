@@ -1,0 +1,9 @@
+runtime:  nodejs16
+
+runtime_config:
+  document_root: .
+
+entrypoint:
+  serve app.js
+
+ 

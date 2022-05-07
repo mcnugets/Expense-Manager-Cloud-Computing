@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate')%>
+
+  <div class="parent container d-flex justify-content-center align-items-center h-100">
+
+    <div class="card" style="width: 22rem;">
+      <div class="card-body">
+        <h5 class="card-title">Edit</h5>
+
+        <form action="<%='/update/'+editdata.transaction_id%>" method="post">
+
+          <label for="amount"></label><input name="amount" class="form-control" placeholder="Amount" required
+            value="<%=(typeof editdata!='undefined')? editdata.amount:''%>">
+
+          <label for="category"></label><input name="category" class="form-control" placeholder="Category" required
+            value="<%=(typeof editdata!='undefined')? editdata.category:''%>">
+
+          <label for="transaction-Date"></label><input name="transaction_date" class="form-control" required
+            value="<%=(typeof editdata!='undefined')? editdata.transaction_date:''%>">
+
+          <div><input type="submit" id="transSubmitBtn" value="Submit"></div>
+
+      </div>
+    </div>
+
+  </div>

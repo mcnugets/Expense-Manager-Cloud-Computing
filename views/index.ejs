@@ -1,0 +1,232 @@
+<% layout('layouts/boilerplate')%>
+<head>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+<scripts
+  type="text/javascript"
+  src="https://www.highcharts.com/samples/data/three-series-1000-points.js"
+></script>
+
+
+</script>
+
+    <script>
+  $.getJSON('/pass_json', function (data) {
+    Highcharts.setOptions({
+      global: {
+        useUTC: false,
+      },
+    });
+
+    var startdate = data[0].transaction_date;
+
+    var chart = new Highcharts.Chart({
+      title: {
+        text: "Expense Graph",
+      },
+
+      chart: {
+        type: "spline",
+        renderTo: "container",
+      },
+
+      xAxis: {
+        type: "datetime",
+       tickPixelInterval: 50,
+
+        title: {
+          text: "Date",
+        },
+      },
+      yAxis: {
+        title: {
+          text: "Expense",
+        },
+        min: 0,
+        max: (function () {
+          var largest_value;
+          largest_value = data[0].amount;
+          for (let index = 1; index < data.length; index++) {
+            if (largest_value < data[index].amount) {
+              largest_value = data[index].amount;
+            }
+          }
+          return largest_value;
+        })(),
+      },
+      tooltip: {
+        formatter: function () {
+          return (
+            "<b>" +
+            "Expense:" +
+            "</b><br/>" + "$" + 
+            this.y +
+            " , "  + "</b><br/>" +
+            
+            Highcharts.dateFormat('%b %e %y', this.x) 
+            
+          );
+        },
+      },
+
+      scrollbar: {
+        enabled: true,
+        inputEnabled: true,
+      },
+
+      navigator: {
+        enabled: true,
+        inputEnabled: true,
+      },
+
+      rangeSelector: {
+        enabled: true,
+        selected: 1,
+        inputEnabled: true,
+      },
+
+      series: [
+        {
+          id: 0,
+          name: "Summary",
+          data: (function () {
+            // generate an array of random data
+            var length = data.length;
+            var data2 = [];
+              
+
+            for (i = 0; i < length; i++) {
+              var expense = data[i].amount;
+              var date = data[i].transaction_date;
+              data2.push([date, expense]);
+            }
+            return data2;
+          })(),
+        },
+      ],
+    });
+
+    chart.addSeries({
+      id: 1,
+      name: "B",
+      data: (function () {
+        // generate an array of random data
+        var data = [],
+          time = startdate,
+          i;
+
+        for (i = 0; i <= graphData.length; i++) {
+          data.push([graphData[i].transaction_date, graph[i].amount]);
+        }
+        return data;
+      })(),
+    });
+    chart.redraw();
+
+    $("#button")[0].disabled = true;
+
+    $("#run").click(function () {
+      setInterval(function () {
+        var x = new Date().getTime(), // current time
+          y = Math.round(Math.random() * 100);
+        chart.series[0].addPoint([x, y], true, false);
+        chart.series[2].addPoint([x, y + 10], true, false);
+        chart.redraw();
+      }, 1000);
+    });
+  });
+</script>
+
+    </head>
+
+    <div class="container">
+
+        <div>
+            <h2 class="my-3">Hello <%= user.username %>
+            </h2>
+        </div>
+
+        <div class="row">
+
+            <div class="col-6">
+
+                <div class="row">
+
+                    <div class="row-6 card py-3">
+                        <span class="card-title">TOTAL EXPENSE LAST MONTH: <%let temp_variable=0%>
+                                <%for (let index=0; index < dash_data[0].length; index++) { %>
+                                    <%temp_variable +=dash_data[0][index].amount%>
+                                        <div">
+                                            <% } %>
+                                                <strong>£<%=temp_variable%></strong>
+
+                        </span>
+                    </div>
+
+                    <div class="my-2"></div>
+
+                    <div class="row-6 card ">
+
+                        <div class="card-body">
+
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Expense</th>
+                                        <th scope="col">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <% if(dash_data.length){ for(var i=0; i< dash_data[1].length; i++) {%>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= (i+1) %>
+                                            </th>
+
+                                            <td id="update_category" name="editable" method="get">
+                                                <%= dash_data[1][i].category%>
+                                            </td>
+                                            <td id="update_amount" name="editable" method="get">
+                                                <%= dash_data[1][i].amount%>
+                                            </td>
+                                            <td id="update_transaction_date" name="editable" method="get">
+                                                <%= dash_data[1][i].transaction_date%>
+                                            </td>
+
+                                        </tr>
+                                        <% } }else{ %>
+                                            <tr>
+                                                <td colspan="3">No user</td>
+                                            </tr>
+                                            <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-6">
+
+                <div class="card">
+
+                    <div class="card-body">
+                        <div id="container" style="height: 400px;  align-content: center;"></div>
+                    </div>
+
+                    <a href="/graphs" class="card-link">View More Graphs</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    </div>

@@ -1,0 +1,136 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-3 mx-4">
+
+                <div class="row">
+
+                    <div class="row-6 card">
+
+                        <h3>Add Transactions</h3>
+
+                        <form action="/transaction_insert" method="POST">
+                            <label for="amount"></label><input name="amount" class="form-control" placeholder="Amount"
+                                required>
+                            <label for="category"></label><input name="category" class="form-control"
+                                placeholder="Category" required>
+                            <label for="transaction-Date"></label><input name="transaction_date" class="form-control"
+                                type="date" required>
+
+                            <div class="m-2"><button class="btn btn-success">Add</button> </div>
+                        </form>
+
+                    </div>
+
+                    <div class="my-2"></div>
+
+                    <div class="row-6 card ">
+
+
+
+                        <h3>Search Transactions</h3>
+
+                        <form action="/search_by_date" method="get">
+
+                            <div class="row align-items-center">
+
+                                <div class="col">
+                                    <label for="transaction-Date" class="col-form-label">From:</label>
+                                </div>
+
+                                <div class="col">
+                                    <input type="date" name="start_date" id="inputPassword6" class="form-control"
+                                        placeholder="Start Date" required>
+                                </div>
+
+                                <div class="m-2"></div>
+
+                                <div class="col">
+                                    <label for="transaction-Date" class="col-form-label">Until:</label>
+                                </div>
+
+                                <div class="col">
+                                    <input type="date" name="end_date" id="inputPassword6" class="form-control"
+                                        placeholder="Start Date" required>
+                                </div>
+
+                                <div class="m-2"><button class="btn btn-success">Search</button> </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-8 card">
+
+                <h3>Transactions</h3>
+
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Expense (£)</th>
+                            <th width="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <% if(data.length){ for(var i=0; i< data.length; i++) {%>
+                            <tr>
+                                <th scope="row">
+                                    <%= (i+1) %>
+                                </th>
+                                <td id="update_date" name="editable" method="get">
+                                    <%= data[i].transaction_date%>
+                                </td>
+                                <td id="update_category" name="editable" method="get">
+                                    <%= data[i].category%>
+                                </td>
+                                <td id="update_amount" name="editable" method="get">
+                                    <%= data[i].amount%>
+                                </td>
+
+                                <td>
+                                    <div name="hide-buttons">
+
+                                        <a type="button" class="btn btn-primary"
+                                            href="/save/<%=data[i].transaction_id%>">
+                                            Edit
+                                        </a>
+
+                                        <a class="btn btn-danger edit" href="/delete/<%=data[i].transaction_id%>">
+                                            Delete</a>
+
+                                    </div>
+
+                                    <div id="save-button --temp" style="display:none">
+                                        <a class="btn btn-success edit" href="/save/<%=data[i].transaction_id%>">
+                                            Save</a>
+
+                                    </div>
+                                </td>
+
+
+                            </tr>
+                            <% } }else{ %>
+                                <tr>
+                                    <td colspan="12">No Transcations</td>
+                                </tr>
+                                <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>

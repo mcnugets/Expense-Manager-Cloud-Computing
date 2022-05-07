@@ -1,0 +1,11 @@
+html {
+    background-color: #59aef8;
+    height: -webkit-fill-available;
+}
+
+body {
+    background-color: #59aef8 !important;
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    min-height: -webkit-fill-available;
+}

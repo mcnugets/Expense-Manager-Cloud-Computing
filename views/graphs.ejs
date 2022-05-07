@@ -1,0 +1,142 @@
+<% layout('layouts/boilerplate')%>
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+  Highcharts.getJSON("/pass_json", function (data) {
+    // Create the chart
+    var startdate = new Date().getTime();
+    console.error(data[0]);
+    var new_data = function () {
+      // generate an array of random data
+      var length = data.length;
+      var data2 = [],
+        time = startdate,
+        i;
+
+      for (i = -12; i < 0; i++) {
+        var expense = data[i].amount;
+        var date = data[i].transaction_date;
+        data2.push([time + i * 1000, 10 * i]);
+      }
+      return data2;
+    };
+    Highcharts.setOptions({
+      global: {
+        useUTC: false,
+      },
+    });
+
+    Highcharts.stockChart("container", {
+      rangeSelector: {
+        buttons: [
+          {
+            type: "day",
+            count: 3,
+            text: "3d",
+          },
+          {
+            type: "week",
+            count: 1,
+            text: "1w",
+          },
+          {
+            type: "month",
+            count: 1,
+            text: "1m",
+          },
+          {
+            type: "month",
+            count: 6,
+            text: "6m",
+          },
+          {
+            type: "year",
+            count: 1,
+            text: "1y",
+          },
+          {
+            type: "all",
+            text: "All",
+          },
+        ],
+
+        selected: 1,
+        inputEnabled: true,
+      },
+      legend: {
+        enabled: true,
+        align: "right",
+        verticalAlign: "top",
+        rtl: false,
+        y: 0,
+      },
+
+      title: {
+        text: "Expense Graph",
+      },
+      chart: {
+        type: "spline",
+      },
+      xAxis: {
+        type: "datetime",
+        title: {
+          text: "Date",
+        },
+        tickPixelInterval: 5,
+      },
+
+      yAxis: {
+        title: {
+          text: "Transactions ($)",
+        },
+        tickPixelInterval: 10,
+      },
+
+      series: [
+        {
+          type: "area",
+          name: "Transaction $",
+          data: (function () {
+            // generate an array of random data
+            var temp_data = [];
+            var length = data.length;
+
+            for (i = 0; i < length; i++) {
+              temp_data.push([data[i].transaction_date, data[i].amount]);
+            }
+            return temp_data;
+          })(),
+          tooltip: {
+            valueDecimals: 2,
+          },
+          fillColor: {
+            linearGradient: {
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 1,
+            },
+            stops: [
+              [0, Highcharts.getOptions().colors[0]],
+              [
+                1,
+                Highcharts.color(Highcharts.getOptions().colors[0])
+                  .setOpacity(0)
+                  .get("rgba"),
+              ],
+            ],
+          },
+        },
+      ],
+    });
+  });
+</script>
+<div class="card shadow p-3 mb-5 bg-body rounded">
+  <div class="card-body">
+    <div id="container" style="height: 500px; min-width: 310px"></div>
+  </div>
+</div>
